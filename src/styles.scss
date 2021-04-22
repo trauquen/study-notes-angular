@@ -1,0 +1,29 @@
+/* You can add global styles to this file, and also import other style files */
+.valid {
+  border-bottom: solid green;
+  }
+  .invalid {
+  border-bottom: solid red;
+  }
+
+// html, body { height: 100%; }
+body { font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.container {
+  display: grid;
+  grid-template-columns: 250px 250px auto;
+}
+
+.item{
+  padding: 0 .5rem; box-sizing: content-box;
+}
+
+.item-1 {
+  grid-column-start: 1;
+  grid-column-end: 1;
+}
+
+.item-1 {
+  grid-column-start: 2;
+  grid-column-end: 1;
+}
