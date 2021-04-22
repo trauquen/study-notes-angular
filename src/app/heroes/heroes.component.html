@@ -1,0 +1,15 @@
+<!-- <ul>
+<li *ngFor="let hero of heroes | sort: 'name'; first as variable" [class.first]="variable" trackBy:trackByHeroes>{{hero | json}}</li>
+</ul> -->
+<app-favorite-heroes></app-favorite-heroes>
+
+<div [appInfiniteScroll]=isEnd (more)="getmore()">
+  <mat-card *ngFor="let hero of heroes">
+    <mat-card-title>{{hero.name}}</mat-card-title>
+    <mat-card-subtitle>{{hero.team}}</mat-card-subtitle>
+    <mat-card-content>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae repudiandae magni quaerat porro error vel ipsam eveniet corporis delectus dolor!</mat-card-content>
+  </mat-card>
+
+</div>
+
+
