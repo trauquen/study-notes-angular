@@ -1,15 +1,35 @@
-<!-- <ul>
-<li *ngFor="let hero of heroes | sort: 'name'; first as variable" [class.first]="variable" trackBy:trackByHeroes>{{hero | json}}</li>
-</ul> -->
-<app-favorite-heroes></app-favorite-heroes>
+<div class="container">
 
-<div [appInfiniteScroll]=isEnd (more)="getmore()">
-  <mat-card *ngFor="let hero of heroes">
-    <mat-card-title>{{hero.name}}</mat-card-title>
-    <mat-card-subtitle>{{hero.team}}</mat-card-subtitle>
-    <mat-card-content>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae repudiandae magni quaerat porro error vel ipsam eveniet corporis delectus dolor!</mat-card-content>
-  </mat-card>
+  <div class="item item-1">
 
+    <div [appInfiniteScroll]=isEnd (more)="getmore()">
+      <mat-card *ngFor="let hero of heroes">
+        <mat-card-title>{{hero.id}}.{{hero.name}}</mat-card-title>
+        <mat-card-subtitle>{{hero.team}}</mat-card-subtitle>
+        <mat-card-content>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae repudiandae magni quaerat porro error vel ipsam eveniet corporis delectus dolor!</mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <div class="item item-2">
+    <ul>
+    <li *ngFor="let hero of heroes | sort: 'name'; first as variable" [class.first]="variable" trackBy:trackByHeroes>{{hero | json}}</li>
+    </ul>
+    <app-favorite-heroes></app-favorite-heroes>
+    <div>
+      <button (click)="addHero('Thudread', 'carly')">Add Thudread</button>
+      </div>
+      <div>
+      <button (click)="renameHero(1)">Rename Boothstomper to Pricezog</button>
+      </div>
+      <div>
+      <button (click)="remove(4)">Delete Piranhaelli</button>
+    </div>
+    <hr>
+    <button (click)='refreshHeroes()'>Refresh in memory API</button>
+    <hr>
+
+    <router-outlet></router-outlet>
+
+  </div>
 </div>
-
-

@@ -1,15 +1,23 @@
 <div class="container">
   <div class="item item-1">
     <span>{{ title }} app is running!</span>
-    <app-hero [id]="ids" [titlep]="title" (liked)="onLike($event)"></app-hero>
-    <input appNumeric type="number">
-    <router-outlet></router-outlet>
-    <p appCopyright></p>
+    <app-hero [id]=ids [titlep]="title" (liked)="onLike($event)"></app-hero>
+    <hr>
+    <input appNumeric type="text" [(ngModel)]="numeric">
+    <br>
+    <label>{{ numeric }}</label>
+    <hr>
+    <app-key-logger [isnumeric]=true></app-key-logger>
+    <hr>
+    <nav>
+      <a routerLink="">Home</a>
+      <a routerLink="/heroes" routerLinkActive="active">Heroes</a>
+      <a routerLink="/heroes/1" routerLinkActive="active">Hero</a>
+    </nav>
+    <!-- <app-heroes *appPermission="['admin', 'agent']"></app-heroes> -->
   </div>
-  <div class="item item-2">
-    <app-heroes *appPermission="['admin', 'agent']"></app-heroes>
-  </div>
-  <div class="item item-3">
 
+  <div class="item item-2 item-2-root">
+    <router-outlet></router-outlet>
   </div>
 </div>

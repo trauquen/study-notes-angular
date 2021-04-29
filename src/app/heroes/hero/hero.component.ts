@@ -1,6 +1,9 @@
 import { Component, OnInit, OnChanges, SimpleChanges, Input, Output, EventEmitter, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
-import { HeroDetailService } from '../hero-detail.service'
-import { Hero } from '../hero'
+import { HeroDetailService } from '../hero-detail.service';
+import { Hero } from '../hero';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { map, switchMap, skipWhile} from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-hero',
@@ -8,36 +11,68 @@ import { Hero } from '../hero'
   styleUrls: ['./hero.component.scss'],
   styles: ['p { color: #900; }'],
   encapsulation: ViewEncapsulation.ShadowDom,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.Default
 })
-export class HeroComponent implements OnInit {
-  hero?: Hero
-  @Input() titlep?:string;
-  @Input() id?:number;
-
-  constructor(private heroDetailService: HeroDetailService) { }
-
-  ngOnInit(): void {
-    if(this.id){
-    this.hero = this.heroDetailService.getHero(this.id);}
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    if(this.id){
-      this.hero = this.heroDetailService.getHero(this.id);
-    }
-
-    const hero = changes['titlep'];
-    const oldValue = hero.previousValue;
-    const newValue = hero.currentValue;
-    console.log(`Hero changed from ${oldValue} to ${newValue}`);
-
-    if (!hero.isFirstChange()) {
-      console.log(`Hero changed from ${oldValue} to ${newValue}`);
-    }
-  }
-
+export class HeroComponent implements OnInit, OnChanges {
+  hero?: Hero;
+  @Input() titlep?: string;
+  @Input() id?: number;
   @Output() liked = new EventEmitter<string>();
 
-  //onClick = () => {console.log("shiver")}
+  constructor(private heroDetailService: HeroDetailService, private route: ActivatedRoute) { }
+
+  ngOnInit(): void {
+    if (this.id){
+      this.getHero(this.id);
+    }
+
+    this.getHeroObs();
+  }
+
+  private getHeroObs(): void {
+    this.route.paramMap.pipe(
+      skipWhile((params: ParamMap) => params.get('id') === null),
+      switchMap((params: ParamMap) => {
+        // console.log(params);
+        const id = params.get('id') as any;
+        return this.heroDetailService.getHero(id);
+      }),
+      map(hero => this.hero = hero)
+    ).subscribe();
+  }
+
+  private getHero(id: number): void {
+    this.heroDetailService.getHero(id).subscribe(
+        hero => { this.hero = hero; },
+        null,
+        () => console.log('done')
+      );
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    for (const key in changes) {
+      if (changes.hasOwnProperty.call(changes, key)) {
+        switch (key){
+          case 'id': {
+            const chng = changes[key];
+            if (!chng.isFirstChange()) {
+              this.getHero(chng.currentValue);
+            }
+            break;
+          }
+          case 'titlep': {
+            const chng = changes[key];
+            const prev = chng.previousValue;
+            const curr = chng.currentValue;
+            console.log(`Hero changed from ${prev} to ${curr}`);
+
+            if (!chng.isFirstChange()) {
+              console.log(`Hero changed from ${prev} to ${curr}`);
+            }
+            break;
+          }
+        }
+      }
+    }
+  }
 }

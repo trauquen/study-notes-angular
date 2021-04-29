@@ -1,16 +1,29 @@
 import { Injectable, Input } from '@angular/core';
 import { HeroService } from './hero.service';
-import { Hero } from './hero'
+import { Hero } from './hero';
+import { Observable } from 'rxjs';
+import { filter, take, map, find, tap } from 'rxjs/operators';
+
+// @Injectable()
+// export class HeroDetailService {
+//   private hero?: Hero;
+
+//   constructor(private heroService: HeroService) { }
+
+//   getHero(id: number): Observable<Hero[]>{
+//     return this.heroService.getHeroes().pipe(
+//       map(heroes => heroes.filter(hero => hero.id === id))
+//     );
+//   }
+// }
+
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class HeroDetailService {
-  private hero?:Hero
+  constructor(private httpClient: HttpClient) { }
 
-  constructor(private heroService: HeroService) { }
-
-  getHero(id:number): Hero | undefined{
-    const heroes = this.heroService.getHeroes();
-    this.hero = heroes.find(hero => hero.id === id);
-    return this.hero
+  getHero(id: number): Observable<Hero>{
+    return this.httpClient.get<Hero>('api/heroes/' + id);
   }
 }
