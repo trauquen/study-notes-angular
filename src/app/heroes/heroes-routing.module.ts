@@ -10,7 +10,6 @@ const routes: Routes = [
   { path: 'heroes', component: HeroesComponent,
     children: [
       { path: 'login', loadChildren: () => import('../form/form.module').then(m => m.FormModule) },
-      { path: 'rlogin', loadChildren: () => import('../form/form.module').then(m => m.FormModule) },
       { path: ':id',
       component: HeroComponent,
       canActivate: [AuthGuard],

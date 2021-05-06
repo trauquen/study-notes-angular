@@ -4,7 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { ReactiveLoginComponent } from './reactive-login/reactive-login.component';
 
 const routes: Routes = [
-  {path: '', component: ReactiveLoginComponent},
+  {path: 'r', component: ReactiveLoginComponent},
   {path: '', component: LoginComponent}
 ];
 

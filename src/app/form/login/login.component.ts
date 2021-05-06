@@ -10,7 +10,7 @@ import { User } from 'src/app/user';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  username?: string;
+  username = 'hunter';
   password?: string;
   constructor(private auth: AuthService, private router: Router) {
   }

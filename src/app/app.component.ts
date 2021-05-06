@@ -26,7 +26,7 @@ export class AppComponent {
 
   onLike = (e: string) => {
     window.alert(`I like ${e}`);
-    this.title = 'Trauquen YEEN';
+    this.title = 'Michael Bay';
     this.ids += 1;
   }
 }

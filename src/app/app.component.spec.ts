@@ -53,6 +53,6 @@ describe('AppComponent', () => {
     const button: DebugElement = fixture.debugElement.query(By.css('button'));
     console.log(button);
     button.triggerEventHandler('click', null);
-    expect(component.title).toEqual('Trauquen YEEN');
+    expect(component.title).toEqual('Michael Bay');
   });
 });

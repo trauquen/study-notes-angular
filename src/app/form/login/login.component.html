@@ -1,3 +1,4 @@
+<p>template-login works!</p>
 <form (ngSubmit)="login()">
   <div>
   <input type="text" name="username" placeholder="Username" [(ngModel)]="username">
@@ -11,3 +12,4 @@
 <div>You are trying to login as
   <b>{{username}}</b>
 </div>
+<a [routerLink]="['./r']" routerLinkActive="router-link-active">reactive login page</a>

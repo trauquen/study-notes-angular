@@ -14,13 +14,24 @@ export class AuthService {
   auth = (username: string, password: string): Observable<boolean> => {
     return this.httpClient.get<User>('api/users?name=' + username).pipe(
       map(user => {
-        const userStr = JSON.parse(JSON.stringify(user));
-        if (userStr.length > 0 && userStr[0].pswd === password) {
+        // console.log(typeof user, user instanceof Array);
+        // console.log(Object.values(user)[0].pswd);
+        user = Object.assign(user)[0];
+        if (user && user.pswd === password){
           return true;
-        } else {
-          return false;
         }
+        return false;
       })
+
+      // map(user => {
+      //   const userStr = JSON.parse(JSON.stringify(user));
+      //   if (userStr.length > 0 && userStr[0].pswd === password) {
+      //     return true;
+      //   } else {
+      //     return false;
+      //   }
+      // })
+
     );
   }
 }

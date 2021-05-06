@@ -15,11 +15,9 @@ export class DataService implements InMemoryDbService {
         { id: 2, name: 'Drogfisher', team: 'avengers' },
         { id: 3, name: 'Bloodyllips', team: 'villains' },
         { id: 4, name: 'Mr Bu Moverse', team: 'villains' },
-        { id: 5, name: 'Piranhaelli', team: 'curly' }
+        { id: 5, name: 'Piranhaelli', team: 'avengers' }
       ],
-      users: [
-        { name: 'shiver', pswd: 'hush' }
-      ]
+      users: [{ name: 'hunter', pswd: 'hush' }]
     };
   }
 }
