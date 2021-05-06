@@ -13,16 +13,16 @@
 
   <div class="item item-2">
     <ul>
-    <li *ngFor="let hero of heroes | sort: 'name'; first as variable" [class.first]="variable" trackBy:trackByHeroes>{{hero | json}}</li>
+      <li *ngFor="let hero of heroes | sort: 'name'; first as variable" [class.first]="variable" trackBy:trackByHeroes>{{hero | json}}</li>
     </ul>
     <app-favorite-heroes></app-favorite-heroes>
     <div>
       <button (click)="addHero('Thudread', 'carly')">Add Thudread</button>
-      </div>
-      <div>
+    </div>
+    <div>
       <button (click)="renameHero(1)">Rename Boothstomper to Pricezog</button>
-      </div>
-      <div>
+    </div>
+    <div>
       <button (click)="remove(4)">Delete Piranhaelli</button>
     </div>
     <hr>

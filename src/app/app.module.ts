@@ -8,7 +8,7 @@ import { CopyrightDirective } from './copyright.directive';
 import { NumericDirective } from './numeric.directive';
 import { PermissionDirective } from './permission.directive';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { KeyLoggerComponent } from './key-logger/key-logger.component';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { DataService } from './data.service';
@@ -31,8 +31,9 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     HeroesModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(DataService)
+    HttpClientInMemoryWebApiModule.forRoot(DataService, { delay: 500 })
   ],
   providers: [],
   bootstrap: [AppComponent]

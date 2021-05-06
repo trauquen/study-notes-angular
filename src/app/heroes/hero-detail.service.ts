@@ -19,7 +19,9 @@ import { filter, take, map, find, tap } from 'rxjs/operators';
 
 import { HttpClient } from '@angular/common/http';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class HeroDetailService {
   constructor(private httpClient: HttpClient) { }
 

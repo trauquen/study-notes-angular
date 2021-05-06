@@ -11,7 +11,7 @@ export class HeroService {
 
   getHeroes(): Observable<Hero[]> {
     return this.http.get<Hero[]>(this.heroesUrl, {
-      headers: new HttpHeaders({'Authorization': 'myAuthToken'})
+      headers: new HttpHeaders({Authorization: 'myAuthToken'})
       });
   }
 

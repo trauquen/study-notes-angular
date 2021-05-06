@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { KeyLoggerComponent } from './key-logger.component';
 
@@ -6,12 +6,12 @@ describe('KeyLoggerComponent', () => {
   let component: KeyLoggerComponent;
   let fixture: ComponentFixture<KeyLoggerComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(async () => {
     TestBed.configureTestingModule({
       declarations: [ KeyLoggerComponent ]
     })
     .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(KeyLoggerComponent);

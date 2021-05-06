@@ -1,16 +1,16 @@
-import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
+import { Directive, Input, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
 
 @Directive({
   selector: '[appPermission]'
 })
-export class PermissionDirective {
+export class PermissionDirective implements OnInit {
 
   @Input() appPermission?: string[];
   private currentRole = 'agent';
 
   constructor(private tmplRef: TemplateRef<any>, private vc: ViewContainerRef) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     console.log(this.tmplRef, this.vc);
     if (this.appPermission?.indexOf(this.currentRole) === -1) {
       this.vc.clear();
@@ -18,5 +18,4 @@ export class PermissionDirective {
       this.vc.createEmbeddedView(this.tmplRef);
     }
   }
-
 }

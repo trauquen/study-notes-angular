@@ -5,14 +5,14 @@ import { Directive, ElementRef, Renderer2 } from '@angular/core';
 })
 export class CopyrightDirective {
 
-  constructor(el: ElementRef, renderer: Renderer2) {
-    renderer.addClass(el.nativeElement, 'copyright');
-    renderer.setProperty(
-    el.nativeElement,
-    'textContent',
-    `Copyright ©${new Date().getFullYear()} All Rights
-    Reserved.`
-    );
-    }
+  // constructor(el: ElementRef, renderer: Renderer2) {
+  //   renderer.addClass(el.nativeElement, 'copyright');
+  //   renderer.setProperty(
+  //   el.nativeElement,
+  //   'textContent',
+  //   `Copyright ©${new Date().getFullYear()} All Rights
+  //   Reserved.`
+  //   );
+  //   }
 
 }

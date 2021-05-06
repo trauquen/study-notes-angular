@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./hero.component.scss'],
   styles: ['p { color: #900; }'],
   encapsulation: ViewEncapsulation.ShadowDom,
-  changeDetection: ChangeDetectionStrategy.Default
+  changeDetection: ChangeDetectionStrategy.Default,
 })
 export class HeroComponent implements OnInit, OnChanges {
   hero?: Hero;
@@ -22,11 +22,16 @@ export class HeroComponent implements OnInit, OnChanges {
   constructor(private heroDetailService: HeroDetailService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    if (this.id){
-      this.getHero(this.id);
-    }
+    // if (this.id){
+    //   this.getHero(this.id);
+    // }
 
-    this.getHeroObs();
+    // this.getHeroObs();
+    // this.hero = this.route.snapshot.data.hero;
+    this.route.data.subscribe((data) => {
+      // console.log(data);
+      this.hero = data.hero;
+    });
   }
 
   private getHeroObs(): void {

@@ -1,15 +1,15 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { HeroDetailService } from './hero-detail.service';
+import { HeroResolverService } from './hero-resolver.service';
 
-describe('HeroDetailService', () => {
-  let service: HeroDetailService;
+describe('HeroResolverService', () => {
+  let service: HeroResolverService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule]
     });
-    service = TestBed.inject(HeroDetailService);
+    service = TestBed.inject(HeroResolverService);
   });
 
   it('should be created', () => {
