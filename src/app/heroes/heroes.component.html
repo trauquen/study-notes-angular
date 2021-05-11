@@ -1,7 +1,6 @@
 <div class="container">
 
-  <div class="item item-1">
-
+  <div class="item">
     <div [appInfiniteScroll]=isEnd (more)="getmore()">
       <mat-card *ngFor="let hero of heroes">
         <mat-card-title>{{hero.id}}.{{hero.name}}</mat-card-title>
@@ -11,22 +10,24 @@
     </div>
   </div>
 
-  <div class="item item-2">
+  <div class="item">
     <ul>
       <li *ngFor="let hero of heroes | sort: 'name'; first as variable" [class.first]="variable" trackBy:trackByHeroes>{{hero | json}}</li>
     </ul>
     <app-favorite-heroes></app-favorite-heroes>
-    <div>
+    <p>
       <button (click)="addHero('Thudread', 'avengers')">Add Thudread</button>
-    </div>
-    <div>
+    </p>
+    <p>
       <button (click)="renameHero(1)">Rename Boothstomper to Pricezog</button>
-    </div>
-    <div>
+    </p>
+    <p>
       <button (click)="remove(4)">Delete Piranhaelli</button>
-    </div>
-    <hr>
+    </p>
+    <p>
     <button (click)='refreshHeroes()'>Refresh in memory API</button>
+    <p>
+
     <hr>
 
     <router-outlet></router-outlet>

@@ -1,0 +1,133 @@
+<button mat-button color="primary">I am an Angular Components button</button>
+<button mat-raised-button color="primary">Raised button</button>
+<button mat-flat-button color="accent">Flat button</button>
+<button mat-stroked-button color="warn">Stroked button</button>
+<button mat-icon-button>
+  <mat-icon>favorite</mat-icon>
+</button>
+<button mat-fab>
+  <mat-icon>delete</mat-icon>
+</button>
+<mat-button-toggle-group>
+  <mat-button-toggle value="left">
+    <mat-icon>format_align_left</mat-icon>
+  </mat-button-toggle>
+  <mat-button-toggle value="center">
+    <mat-icon>format_align_center</mat-icon>
+  </mat-button-toggle>
+  <mat-button-toggle value="right">
+    <mat-icon>format_align_right</mat-icon>
+  </mat-button-toggle>
+</mat-button-toggle-group>
+
+<hr>
+
+<h3>reactive-material-login works!</h3>
+
+<form [formGroup]="loginForm" (ngSubmit)="login()" class="login-form">
+  <div class="loing-form-field">
+    <mat-form-field>
+      <input matInput formControlName="username" type="text" placeholder="Username" required>
+      <mat-error *ngIf="username.touched && username.invalid">The username is not valid. </mat-error>
+    </mat-form-field>
+  </div>
+  <div class="loing-form-field">
+    <mat-form-field>
+      <input matInput formControlName="password" type="password" placeholder="Password" required>
+      <mat-error *ngIf="password.touched && password.errors?.required">Password is required </mat-error>
+      <mat-error *ngIf="password.touched && password.errors?.minlength">The password is too short. </mat-error>
+      <mat-hint *ngIf="showPasswordHint">Password should be minimum six characters long. </mat-hint>
+    </mat-form-field>
+  </div>
+  <div class="loing-form-field">
+    <button mat-raised-button type="submit" [disabled]="this.loginForm.invalid">Login</button>
+  </div>
+</form>
+<p>
+  <br>
+  You are trying to login as
+  <b>{{this.loginForm.controls.username.value}}</b>.
+  <a [routerLink]="['/heroes/login/r']">login with reactive form. </a>
+</p>
+
+<hr>
+
+<h3>Hero Details</h3>
+<form [formGroup]="heroDetails" (ngSubmit)="saveHero()" class="login-form">
+  <div class="loing-form-field">
+    <mat-form-field>
+      <input matInput type="text" formControlName="name" placeholder="Name" [matAutocomplete]="heroesAuto" required>
+      <mat-error *ngIf="this.heroDetails.controls.name && this.heroDetails.controls.name.errors?.required">Name is required</mat-error>
+      <mat-error *ngIf="this.heroDetails.controls.name.hasError('reservedName')">Hero name is already taken</mat-error>
+    </mat-form-field>
+    <mat-autocomplete #heroesAuto="matAutocomplete">
+      <mat-option *ngFor="let hero of filteredHeroes$ | async" [value]="hero.name">{{hero.name}}</mat-option>
+    </mat-autocomplete>
+    <mat-form-field>
+      <input matInput type="text" name="realname" placeholder="Real Name" formControlName="realName" required>
+    </mat-form-field>
+
+    <form formGroupName="biometricData">
+      <mat-label>biometricData</mat-label>
+      <mat-form-field>
+        <input matInput type="number" name="age" placeholder="Age" formControlName="age" required>
+        <mat-error *ngIf="age.errors?.required">Age is required</mat-error>
+      </mat-form-field>
+    </form>
+
+  </div>
+</form>
+
+
+
+<!--
+
+
+
+
+  <form formGroupName="biometricData">
+    <p>
+      <label>Age</label><input type="number" formControlName="age">
+    </p>
+    <p>
+      <label>Eyes</label><input type="color" formControlName="eyes">
+    </p>
+    <p>
+      <label>Hair</label><input type="color" formControlName="hair">
+    </p>
+    <p>
+      <label>Gender</label>
+      <input type="radio" formControlName="gender" value="man" name="gender" id="nameMan"><label for="nameMan">Man</label>
+      <input type="radio" formControlName="gender" value="woman" name="gender" id="nameWo"><label for="nameWo">Woman</label>
+    </p>
+    <p formArrayName="rides">
+      <label>Rides</label>
+      <span *ngFor="let ride of ridesArr; let i=index">
+        <input type="checkbox" [formControlName]="i" value="" name="rides" id="{{ride}}">
+        <label for="{{ride}}">{{ride}}</label>
+      </span>
+      <span class="help-block" *ngIf="this.rides.touched && !this.rides.value.includes(true)">At least one choosed. </span>
+    </p>
+    <p>
+      <label>Skin</label>
+      <select formControlName="skin">
+        <option value="0">White</option>
+        <option value="1">Black</option>
+        <option value="2">Yellow</option>
+        <option value="3">Brown</option>
+      </select>
+    </p>
+  </form>
+  <form formArrayName="powers">
+    <p *ngFor="let power of powers.controls; let i=index">
+      <label>
+      Power:
+      </label><input type="text" [formControlName]="i">
+      <mat-icon class="icon" (click)="removePowerAt(i)">close</mat-icon>
+    </p>
+  </form>
+  <button (click)="addPower()" type="button">Add power</button>
+  <button (click)="addHero()" type="button">Add hero</button>
+  <button (click)="addBio()" type="button">Add biometric</button>
+  <button type="submit">Save</button>
+</form> -->

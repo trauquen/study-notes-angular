@@ -25,7 +25,7 @@ import { SortPipe } from '../sort.pipe';
   exports: [
     // HeroesComponent,
     HeroComponent
-  ],
-  providers: [HeroService]
+  ]
+  // providers: [HeroService]
 })
 export class HeroesModule { }

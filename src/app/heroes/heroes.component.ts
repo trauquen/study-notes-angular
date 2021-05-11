@@ -67,7 +67,7 @@ export class HeroesComponent implements OnInit {
 
   getmore = () => {
     this.heroes?.map(h => this.heroes?.push(h));
-    if (this.heroes && this.heroes.length > 19){
+    if (this.heroes && this.heroes.length > 9){
       console.log(this.heroes.length);
       this.isEnd = true;
     }

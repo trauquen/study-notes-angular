@@ -2,13 +2,17 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.8.
 
-## Return undefined when get value from property of Object.
+### Return undefined when get value from property of Object.
 
 Format your object with `JSON.parse(JSON.stringify(user))` or `Object.assign(user)`, refer to auth.service.ts.
 
-## Code scaffolding
+### Common Cli command.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+`ng new project-name --routing --style scss --prefix pb`
+
+`ng generate module shared --module app`
+
+`ng serve --configuration=qa`
 
 ## Build
 

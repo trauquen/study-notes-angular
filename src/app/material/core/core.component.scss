@@ -1,0 +1,8 @@
+.login-form{
+  display: grid;
+  grid-template-columns: 200px 200px auto;
+}
+
+.login-form-field{
+  padding: 0 .5rem; box-sizing: content-box;
+}

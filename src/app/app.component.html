@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="item item-1">
+  <div class="item">
     <span>{{ title }} app is running!</span>
     <app-hero [id]=ids [titlep]="title" (liked)="onLike($event)"></app-hero>
     <hr>
@@ -14,12 +14,14 @@
       <a routerLink="/heroes" routerLinkActive="active">Heroes</a>
       <a routerLink="/heroes/1" routerLinkActive="active">Hero</a>
       <a routerLink="/about" routerLinkActive="active">About</a>
-      <a routerLink="/heroes/login" routerLinkActive="active">Login</a>
+      <a routerLink="/heroes/login/r" routerLinkActive="active">Login</a>
+      <a routerLink="/material" routerLinkActive="active">Material</a>
     </nav>
     <!-- <app-heroes *appPermission="['admin', 'agent']"></app-heroes> -->
   </div>
 
-  <div class="item item-2 item-2-root">
+  <div class="item item-2-root">
     <router-outlet></router-outlet>
+    <p appCopyright></p>
   </div>
 </div>

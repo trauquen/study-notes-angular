@@ -1,16 +1,77 @@
-<p>reactive-login works!</p>
+<h3>reactive-login works!</h3>
 <form [formGroup]="loginForm" (ngSubmit)="login()">
-  <div>
-  <input type="text" name="username" placeholder="Username">
-  </div>
-  <div>
-  <input type="password" name="password" placeholder="Password">
-  </div>
-  <button type="submit">Login</button>
+  <p>
+    <input type="text" name="username" placeholder="Username" formControlName="username" required>
+    <span class="help-block" *ngIf="username.touched && username.invalid">The username is not valid. </span>
+  </p>
+  <p>
+    <input type="password" name="password" placeholder="Password" formControlName="password" required>
+    <span class="help-block" *ngIf="password.touched && password.errors?.required">The password is required. </span>
+    <span class="help-block" *ngIf="password.touched && password.errors?.minlength">The password is too short. </span>
+    <span *ngIf="showPasswordHint">Password should be minimum six characters long. </span>
+  </p>
+  <p><button type="submit" [disabled]="loginForm.invalid">Login</button></p>
 </form>
 
-<div>You are trying to login as
-  <b>{{loginForm.controls.username.value}}</b>
-</div>
+<p>You are trying to login as
+  <b>{{loginForm.controls.username.value}}</b>.
+  <a [routerLink]="['../']" routerLinkActive="router-link-active">login with template</a>
+</p>
 
-<a [routerLink]="['../']" routerLinkActive="router-link-active">login page</a>
+<hr>
+
+<h3>Hero Details</h3>
+<form [formGroup]="heroDetails" (ngSubmit)="saveHero()">
+  <p>
+    <input type="text" name="name" placeholder="name" formControlName="name" required>
+    <span class="help-block" *ngIf="heroDetails.controls.name.hasError('reservedName')">Hero name is already taken</span>
+  </p>
+  <p>
+    <input type="text" name="realname" placeholder="Real Name" formControlName="realName" required>
+  </p>
+  <form formGroupName="biometricData">
+    <p>
+      <label>Age</label><input type="number" formControlName="age">
+    </p>
+    <p>
+      <label>Eyes</label><input type="color" formControlName="eyes">
+    </p>
+    <p>
+      <label>Hair</label><input type="color" formControlName="hair">
+    </p>
+    <p>
+      <label>Gender</label>
+      <input type="radio" formControlName="gender" value="man" name="gender" id="nameMan"><label for="nameMan">Man</label>
+      <input type="radio" formControlName="gender" value="woman" name="gender" id="nameWo"><label for="nameWo">Woman</label>
+    </p>
+    <p formArrayName="rides">
+      <label>Rides</label>
+      <span *ngFor="let ride of ridesArr; let i=index">
+        <input type="checkbox" [formControlName]="i" value="" name="rides" id="{{ride}}">
+        <label for="{{ride}}">{{ride}}</label>
+      </span>
+      <span class="help-block" *ngIf="this.rides.touched && !this.rides.value.includes(true)">At least one choosed. </span>
+    </p>
+    <p>
+      <label>Skin</label>
+      <select formControlName="skin">
+        <option value="0">White</option>
+        <option value="1">Black</option>
+        <option value="2">Yellow</option>
+        <option value="3">Brown</option>
+      </select>
+    </p>
+  </form>
+  <form formArrayName="powers">
+    <p *ngFor="let power of powers.controls; let i=index">
+      <label>
+      Power:
+      </label><input type="text" [formControlName]="i">
+      <mat-icon class="icon" (click)="removePowerAt(i)">close</mat-icon>
+    </p>
+  </form>
+  <button (click)="addPower()" type="button">Add power</button>
+  <button (click)="addHero()" type="button">Add hero</button>
+  <button (click)="addBio()" type="button">Add biometric</button>
+  <button type="submit">Save</button>
+</form>

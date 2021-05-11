@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Hero } from './hero';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 
 @Injectable({providedIn: 'root'})
 // @Injectable()
@@ -26,5 +27,11 @@ export class HeroService {
 
   removeHero(id: number): Observable<any>{
     return this.http.delete(this.heroesUrl + id);
+  }
+
+  filterHero(name: string): Observable<Hero[]>{
+    return this.http.get<Hero[]>(this.heroesUrl).pipe(
+      map(hero => hero.filter(h =>  h.name.toLowerCase().startsWith(name.toLowerCase())))
+    );
   }
 }
