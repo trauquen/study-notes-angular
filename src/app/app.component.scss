@@ -1,3 +1,4 @@
+@use '~@angular/material' as mat;
 @import '../theme.scss';
 
 :host {
@@ -17,9 +18,9 @@ nav a{
   margin-right: 1rem; display: inline-block; padding: 3px 5px;
 }
 .active {
-  background-color: mat-color($primaryPalette); color: white; border-radius: .25rem;
+  background-color: mat.get-color-from-palette($primaryPalette); color: white; border-radius: .25rem;
 }
 
 .mat-menu-item:hover:not([disabled]){
-   color: mat-color($primaryPalette);
+   color: mat.get-color-from-palette($primaryPalette);
 }

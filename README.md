@@ -20,12 +20,13 @@ Format your object with `JSON.parse(JSON.stringify(user))` or `Object.assign(use
 ### Fix `FormArray` Error: Cannot find control with path: 'powers -> i'.
 
 Wrap `formControlName` with [] in template like below:
-`
+
+```
 <p *ngFor="let power of powers.controls; let i=index">
   <label>Power:</label><input type="text" [formControlName]="i">
   <mat-icon class="icon" (click)="removePowerAt(i)">close</mat-icon>
 </p>
-`
+```
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
