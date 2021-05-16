@@ -42,13 +42,13 @@
   <div class="loing-form-field">
     <button mat-raised-button type="submit" [disabled]="this.loginForm.invalid">Login</button>
   </div>
+  <p>
+    <br>
+    You are trying to login as
+    <b>{{this.loginForm.controls.username.value}}</b>.
+    <a [routerLink]="['/heroes/login/r']">login with reactive form. </a>
+  </p>
 </form>
-<p>
-  <br>
-  You are trying to login as
-  <b>{{this.loginForm.controls.username.value}}</b>.
-  <a [routerLink]="['/heroes/login/r']">login with reactive form. </a>
-</p>
 
 <hr>
 
@@ -59,75 +59,93 @@
       <input matInput type="text" formControlName="name" placeholder="Name" [matAutocomplete]="heroesAuto" required>
       <mat-error *ngIf="this.heroDetails.controls.name && this.heroDetails.controls.name.errors?.required">Name is required</mat-error>
       <mat-error *ngIf="this.heroDetails.controls.name.hasError('reservedName')">Hero name is already taken</mat-error>
+      <mat-autocomplete #heroesAuto="matAutocomplete">
+        <mat-option *ngFor="let hero of filteredHeroes$ | async" [value]="hero.name">{{hero.name}}</mat-option>
+      </mat-autocomplete>
     </mat-form-field>
-    <mat-autocomplete #heroesAuto="matAutocomplete">
-      <mat-option *ngFor="let hero of filteredHeroes$ | async" [value]="hero.name">{{hero.name}}</mat-option>
-    </mat-autocomplete>
+
     <mat-form-field>
       <input matInput type="text" name="realname" placeholder="Real Name" formControlName="realName" required>
     </mat-form-field>
 
     <form formGroupName="biometricData">
-      <mat-label>biometricData</mat-label>
+      <h3>biometricData</h3>
       <mat-form-field>
         <input matInput type="number" name="age" placeholder="Age" formControlName="age" required>
         <mat-error *ngIf="age.errors?.required">Age is required</mat-error>
       </mat-form-field>
+      <mat-form-field>
+        <input matInput type="text" name="birth" placeholder="Birth" formControlName="birth" [max]="maxDate" [matDatepicker]='picker' required>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="birth.errors?.required">Birth is required</mat-error>
+        <mat-error *ngIf="birth.hasError('matDatepickerMax')">Birth is must before 01/01/2014</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="color" name="hair" placeholder="Hair" formControlName="hair" required>
+        <mat-error *ngIf="hair.errors?.required">Hair is required</mat-error>
+      </mat-form-field>
+      <div class="control-gp-wrap">
+        <mat-label>Gender</mat-label>
+        <mat-radio-group aria-label="Select an option" formControlName="gender">
+          <mat-radio-button value="man">Man</mat-radio-button>
+          <mat-radio-button value="woman">Woman</mat-radio-button>
+        </mat-radio-group>
+        <mat-error *ngIf="gender.errors?.required">Gender is required</mat-error>
+      </div>
+      <div formGroupName="rides" class="control-gp-wrap">
+        <mat-label>Rides</mat-label>
+        <mat-checkbox formControlName="toyota">Toyota</mat-checkbox>
+        <mat-checkbox formControlName="muscle">Muscle</mat-checkbox>
+        <mat-checkbox formControlName="horse">Horse</mat-checkbox>
+        <div>
+          <mat-error *ngIf="rides.dirty && !isChoiced(rides.value)">At least one choosed. </mat-error>
+        </div>
+      </div>
+      <mat-form-field>
+        <mat-label>Skin</mat-label>
+        <mat-select required formControlName="skin">
+          <mat-option value="black">Black</mat-option>
+          <mat-option value="yellow">Yellow</mat-option>
+          <mat-option value="brown">Brown</mat-option>
+          <mat-option value="white">White</mat-option>
+        </mat-select>
+      </mat-form-field>
     </form>
+  </div>
+  <div class="loing-form-field">
+    <form formArrayName="powers">
+        <div *ngFor="let power of powers.controls; let i=index">
+          <mat-form-field>
+            <input matInput type="text" [formControlName]="i" required>
+            <button mat-icon-button matSuffix (click)="removePowerAt(i)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+    </form>
+  </div>
+  <div class="loing-form-field">
+    <button class="herodetail-btn" mat-raised-button color="primary" (click)="addPower()" type="button" [disabled]="powers.length > 5">Add power</button><br>
+    <button class="herodetail-btn" mat-raised-button color="primary" (click)="addHero()" type="button">Add hero</button><br>
+    <button class="herodetail-btn" mat-raised-button color="primary" (click)="addBio()" type="button">Add biometric</button><br>
+    <button class="herodetail-btn" mat-raised-button color="primary" (click)="showDialog()" type="button">Reset</button><br>
+    <button class="herodetail-btn" mat-raised-button color="primary" type="submit">Save</button>
 
+    <hr>
+
+    <mat-selection-list>
+      <mat-list-option *ngFor="let hero of heroesFix">
+      {{hero.name}}
+      </mat-list-option>
+    </mat-selection-list>
   </div>
 </form>
 
-
-
-<!--
-
-
-
-
-  <form formGroupName="biometricData">
-    <p>
-      <label>Age</label><input type="number" formControlName="age">
-    </p>
-    <p>
-      <label>Eyes</label><input type="color" formControlName="eyes">
-    </p>
-    <p>
-      <label>Hair</label><input type="color" formControlName="hair">
-    </p>
-    <p>
-      <label>Gender</label>
-      <input type="radio" formControlName="gender" value="man" name="gender" id="nameMan"><label for="nameMan">Man</label>
-      <input type="radio" formControlName="gender" value="woman" name="gender" id="nameWo"><label for="nameWo">Woman</label>
-    </p>
-    <p formArrayName="rides">
-      <label>Rides</label>
-      <span *ngFor="let ride of ridesArr; let i=index">
-        <input type="checkbox" [formControlName]="i" value="" name="rides" id="{{ride}}">
-        <label for="{{ride}}">{{ride}}</label>
-      </span>
-      <span class="help-block" *ngIf="this.rides.touched && !this.rides.value.includes(true)">At least one choosed. </span>
-    </p>
-    <p>
-      <label>Skin</label>
-      <select formControlName="skin">
-        <option value="0">White</option>
-        <option value="1">Black</option>
-        <option value="2">Yellow</option>
-        <option value="3">Brown</option>
-      </select>
-    </p>
-  </form>
-  <form formArrayName="powers">
-    <p *ngFor="let power of powers.controls; let i=index">
-      <label>
-      Power:
-      </label><input type="text" [formControlName]="i">
-      <mat-icon class="icon" (click)="removePowerAt(i)">close</mat-icon>
-    </p>
-  </form>
-  <button (click)="addPower()" type="button">Add power</button>
-  <button (click)="addHero()" type="button">Add hero</button>
-  <button (click)="addBio()" type="button">Add biometric</button>
-  <button type="submit">Save</button>
-</form> -->
+<div>
+  <mat-grid-list cols="4" rowHeight="100px">
+    <mat-grid-tile *ngFor="let tile of tiles" [colspan]="tile.cols" [rowspan]="tile.rows" [style.background]="tile.color">
+      {{tile.text}}
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

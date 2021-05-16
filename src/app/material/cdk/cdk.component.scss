@@ -1,0 +1,13 @@
+.clipfield {
+  width: 100%;
+}
+
+mat-list-item {
+  cursor: move;
+  border: 1px lightgray solid;
+  margin-bottom: 1rem;
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}

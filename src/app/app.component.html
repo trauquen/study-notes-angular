@@ -9,6 +9,22 @@
     <hr>
     <app-key-logger [isnumeric]=true></app-key-logger>
     <hr>
+    <p>
+      <button mat-raised-button [matMenuTriggerFor]="menu" color="primary">
+        <mat-icon>more_vert</mat-icon>
+        <span>Menu</span>
+      </button>
+    </p>
+    <mat-menu #menu>
+      <!-- <a routerLink="" mat-menu-item routerLinkActive="active">Home</a> -->
+      <a routerLink="/heroes" mat-menu-item routerLinkActive="active" [matMenuTriggerFor]="submenu">Heroes</a>
+      <a routerLink="/about" mat-menu-item routerLinkActive="active">About</a>
+      <a routerLink="/material" mat-menu-item routerLinkActive="active">Material</a>
+    </mat-menu>
+    <mat-menu #submenu>
+      <a routerLink="/heroes/1" mat-menu-item routerLinkActive="active">Hero</a>
+      <a routerLink="/heroes/login/r" mat-menu-item routerLinkActive="active">Login</a>
+    </mat-menu>
     <nav>
       <a routerLink="">Home</a>
       <a routerLink="/heroes" routerLinkActive="active">Heroes</a>
@@ -16,6 +32,8 @@
       <a routerLink="/about" routerLinkActive="active">About</a>
       <a routerLink="/heroes/login/r" routerLinkActive="active">Login</a>
       <a routerLink="/material" routerLinkActive="active">Material</a>
+      <a routerLink="/material/clients" routerLinkActive="active">Clients</a>
+      <a routerLink="/material/cdk" routerLinkActive="active">CDK</a>
     </nav>
     <!-- <app-heroes *appPermission="['admin', 'agent']"></app-heroes> -->
   </div>

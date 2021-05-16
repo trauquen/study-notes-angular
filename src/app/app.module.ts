@@ -14,6 +14,9 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { DataService } from './data.service';
 import { HttpClientModule } from '@angular/common/http';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,10 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(DataService, { delay: 500 })
+    HttpClientInMemoryWebApiModule.forRoot(DataService, { delay: 500 }),
+    MatButtonModule,
+    MatIconModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,16 @@
+<h1>cdk works!</h1>
+
+<mat-form-field class="clipfield">
+  <textarea matInput [(ngModel)]="content" placeholder="Enter some text and click the Copy button"></textarea>
+</mat-form-field><br>
+<button mat-raised-button [cdkCopyToClipboard]="content">
+  <mat-icon>content_copy</mat-icon>Copy
+</button>
+
+<hr>
+
+<mat-list cdkDropList (cdkDropListDropped)="reorder($event)">
+  <mat-list-item *ngFor="let hero of heroes" cdkDrag>
+  {{hero.name}}
+  </mat-list-item>
+</mat-list>

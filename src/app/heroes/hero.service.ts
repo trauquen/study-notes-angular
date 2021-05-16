@@ -31,7 +31,7 @@ export class HeroService {
 
   filterHero(name: string): Observable<Hero[]>{
     return this.http.get<Hero[]>(this.heroesUrl).pipe(
-      map(hero => hero.filter(h =>  h.name.toLowerCase().startsWith(name.toLowerCase())))
+      map(hero => hero.filter(h =>  h.name.toLowerCase().startsWith(name?.toLowerCase())))
     );
   }
 }

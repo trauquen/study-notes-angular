@@ -64,9 +64,7 @@
   </form>
   <form formArrayName="powers">
     <p *ngFor="let power of powers.controls; let i=index">
-      <label>
-      Power:
-      </label><input type="text" [formControlName]="i">
+      <label>Power:</label><input type="text" [formControlName]="i">
       <mat-icon class="icon" (click)="removePowerAt(i)">close</mat-icon>
     </p>
   </form>

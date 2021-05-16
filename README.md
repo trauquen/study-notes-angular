@@ -14,11 +14,16 @@ Format your object with `JSON.parse(JSON.stringify(user))` or `Object.assign(use
 
 `ng serve --configuration=qa`
 
-## Build
+### Using `switchMap` in `pipe()` to switch from one observable to the other.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-## Running unit tests
+### Fix `FormArray` Error: Cannot find control with path: 'powers -> i'.
+
+Wrap `formControlName` with [] in template like below:
+`<p *ngFor="let power of powers.controls; let i=index">
+  <label>Power:</label><input type="text" [formControlName]="i">
+  <mat-icon class="icon" (click)="removePowerAt(i)">close</mat-icon>
+</p>`
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
