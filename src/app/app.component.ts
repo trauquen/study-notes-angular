@@ -11,7 +11,7 @@ import { HeroDetailService } from './heroes/hero-detail.service';
   providers: [HeroDetailService]
 })
 export class AppComponent {
-  title = 'Hello Angular 11';
+  title = 'Hello Angular 12';
   hero?: Hero;
   ids = 1;
   numeric?: string;

@@ -1,9 +1,16 @@
-import { ValidatorFn, AbstractControl } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { reservedNameValidator } from './reserved-name.directive';
 
 describe('ReservedNameDirective', () => {
-  it('should create an instance', () => {
-    // const directive = new ReservedNameDirective();
-    // expect(directive).toBeTruthy();
+  const input: FormControl = new FormControl('', reservedNameValidator());
+
+  it('should return false', () => {
+    input.patchValue('Hunter');
+    expect(input.hasError('reservedName')).toBeTrue();
+  });
+
+  it('should return true', () => {
+    input.patchValue('Hun');
+    expect(input.hasError('reservedName')).toBeFalse();
   });
 });

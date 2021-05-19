@@ -48,9 +48,7 @@ export class HeroComponent implements OnInit, OnChanges {
 
   private getHero(id: number): void {
     this.heroDetailService.getHero(id).subscribe(
-        hero => { this.hero = hero; },
-        null,
-        () => console.log('done')
+        hero => { this.hero = hero; }
       );
   }
 
