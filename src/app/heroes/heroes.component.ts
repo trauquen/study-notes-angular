@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Hero } from './hero';
+import { Observable, of } from 'rxjs';
+import { Hero } from '../shared/hero';
 import { HeroService } from './hero.service';
 
 @Component({
@@ -10,6 +11,8 @@ import { HeroService } from './hero.service';
 export class HeroesComponent implements OnInit {
   heroes: Hero[] = [];
 
+  heroes$?: Observable<Hero[]>;
+
   isEnd?: boolean;
 
   constructor(private heroService: HeroService) {
@@ -17,17 +20,16 @@ export class HeroesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getHeroes();
+    this.heroes$ = this.heroService.getHeroes();
   }
 
   trackByHeroes(index: number, hero: Hero): string {
       return hero.name;
   }
 
-  private getHeroes(): void {
+  getHeroes(): void {
     this.heroService.getHeroes().subscribe(
-        heroes => this.heroes = heroes,
-        null,
-        () => console.log('done')
+        heroes => this.heroes = heroes
       );
   }
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
-import { Hero } from '../hero';
+import { Hero } from '../../shared/hero';
 import { HeroDetailService } from '../hero-detail.service';
 import { take, mergeMap } from 'rxjs/operators';
 import { of, Observable } from 'rxjs';

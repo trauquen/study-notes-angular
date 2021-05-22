@@ -1,6 +1,6 @@
 import { Component, OnInit, OnChanges, SimpleChanges, Input, Output, EventEmitter, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
 import { HeroDetailService } from '../hero-detail.service';
-import { Hero } from '../hero';
+import { Hero } from '../../shared/hero';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { map, switchMap, skipWhile} from 'rxjs/operators';
 import { Observable } from 'rxjs';

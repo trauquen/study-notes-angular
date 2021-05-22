@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
-import { Hero } from './heroes/hero';
+import { Hero } from './shared/hero';
 import { HeroDetailService } from './heroes/hero-detail.service';
 
 @Component({

@@ -10,19 +10,19 @@
     <app-key-logger [isnumeric]=true></app-key-logger>
     <hr>
     <p>
-      <button mat-raised-button [matMenuTriggerFor]="menu" color="primary">
+      <button mat-raised-button [matMenuTriggerFor]="menu" color="primary" id="menu">
         <mat-icon>more_vert</mat-icon>
         <span>Menu</span>
       </button>
     </p>
     <mat-menu #menu>
-      <!-- <a routerLink="" mat-menu-item routerLinkActive="active">Home</a> -->
-      <a routerLink="/heroes" mat-menu-item routerLinkActive="active" [matMenuTriggerFor]="submenu">Heroes</a>
+      <a routerLink="" mat-menu-item routerLinkActive="active">Home</a>
+      <a mat-menu-item routerLinkActive="active" [matMenuTriggerFor]="submenu" id="submenu">Heroes</a>
       <a routerLink="/about" mat-menu-item routerLinkActive="active">About</a>
       <a routerLink="/material" mat-menu-item routerLinkActive="active">Material</a>
     </mat-menu>
     <mat-menu #submenu>
-      <a routerLink="/heroes/1" mat-menu-item routerLinkActive="active">Hero</a>
+      <a routerLink="/heroes/1" mat-menu-item routerLinkActive="active" id="herolink">Hero</a>
       <a routerLink="/heroes/login/r" mat-menu-item routerLinkActive="active">Login</a>
     </mat-menu>
     <nav>

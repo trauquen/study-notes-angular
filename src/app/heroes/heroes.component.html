@@ -14,6 +14,11 @@
     <ul>
       <li *ngFor="let hero of heroes | sort: 'name'; first as variable" [class.first]="variable" trackBy:trackByHeroes>{{hero | json}}</li>
     </ul>
+
+    <ul>
+      <li *ngFor="let hero of heroes$ | async;">{{hero | json}}</li>
+    </ul>
+
     <app-favorite-heroes></app-favorite-heroes>
     <p>
       <button (click)="addHero('Thudread', 'avengers')">Add Thudread</button>

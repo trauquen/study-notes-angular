@@ -1,6 +1,6 @@
 import { Injectable, Input } from '@angular/core';
 import { HeroService } from './hero.service';
-import { Hero } from './hero';
+import { Hero } from '../shared/hero';
 import { Observable } from 'rxjs';
 import { filter, take, map, find, tap } from 'rxjs/operators';
 

@@ -27,3 +27,7 @@ Wrap `formControlName` with [] in template like below:
   <mat-icon class="icon" (click)="removePowerAt(i)">close</mat-icon>
 </p>
 ```
+
+### Test 
+
+https://stackblitz.com/angular/kgpnygmredj
