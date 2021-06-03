@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import { Hero } from '../../shared/hero';
-import { HeroService } from 'src/app/heroes/hero.service';
+import { HeroService } from '../../heroes/hero.service';
 import { reservedNameValidator } from '../../form/reserved-name.directive';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';

@@ -1,10 +1,8 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Observable } from 'rxjs';
-import { Client } from 'src/app/shared/client';
-import { ClientService } from 'src/app/shared/client.service';
+import { ClientService } from '../../shared/client.service';
 
 @Component({
   selector: 'app-clients',
