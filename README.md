@@ -1,6 +1,6 @@
 # Study Notes on Angular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.0.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.3.
 
 ### Return undefined when get value from property of Object.
 
@@ -8,11 +8,14 @@ Format your object with `JSON.parse(JSON.stringify(user))` or `Object.assign(use
 
 ### Common Cli command.
 
-`ng new project-name --routing --style scss --prefix pb`
+```
+ng new project-name --routing --style scss --prefix pb
+ng generate module shared --module app
+ng serve --configuration=qa
 
-`ng generate module shared --module app`
-
-`ng serve --configuration=qa`
+ng update @angular/core @angular/cli
+ng update @angular/material
+```
 
 ### Using `switchMap` in `pipe()` to switch from one observable to the other.
 
@@ -28,6 +31,3 @@ Wrap `formControlName` with [] in template like below:
 </p>
 ```
 
-### Test 
-
-https://stackblitz.com/angular/kgpnygmredj
