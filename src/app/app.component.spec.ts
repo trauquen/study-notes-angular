@@ -1,11 +1,10 @@
-import { DebugElement } from '@angular/core';
+import { DebugElement, Input } from '@angular/core';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { AppComponent } from './app.component';
 import { HeroComponent } from './heroes/hero/hero.component';
-// import { KeyLoggerComponent } from './key-logger/key-logger.component';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { RouterLinkDirectiveStub } from './shared/router-link-directive-stub';
@@ -15,12 +14,14 @@ import { MatMenuHarness, MatMenuItemHarness } from '@angular/material/menu/testi
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-key-logger'
 })
-export class KeyLoggerComponent {}
+export class KeyLoggerComponent {
+  @Input() isnumeric?: boolean;
+}
 
 let loader: HarnessLoader;
 
@@ -109,5 +110,12 @@ fdescribe('AppComponent', () => {
     expect((await submenu?.getItems())?.length).toEqual(2);
   });
 
-
+  it('should get string from input', () => {
+    const ipt: HTMLInputElement = fixture.nativeElement.querySelector('input');
+    const lbl: HTMLLabelElement = fixture.nativeElement.querySelector('label');
+    ipt.value = '29232932';
+    ipt.dispatchEvent(new Event('input'));
+    fixture.detectChanges();
+    expect(lbl.textContent).toBe('29232932');
+  });
 });
