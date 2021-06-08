@@ -5,7 +5,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { AppComponent } from './app.component';
 import { HeroComponent } from './heroes/hero/hero.component';
-import { KeyLoggerComponent } from './key-logger/key-logger.component';
+// import { KeyLoggerComponent } from './key-logger/key-logger.component';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { RouterLinkDirectiveStub } from './shared/router-link-directive-stub';
@@ -14,6 +14,13 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatMenuHarness, MatMenuItemHarness } from '@angular/material/menu/testing';
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-key-logger'
+})
+export class KeyLoggerComponent {}
 
 let loader: HarnessLoader;
 
