@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import { Hero } from '../shared/hero';
 import { HeroService } from './hero.service';
 
 @Component({
   selector: 'app-heroes',
   templateUrl: './heroes.component.html',
-  styleUrls: ['./heroes.component.scss']
+  styleUrls: ['./heroes.component.scss'],
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeroesComponent implements OnInit {
   heroes: Hero[] = [];
@@ -29,8 +31,8 @@ export class HeroesComponent implements OnInit {
 
   getHeroes(): void {
     this.heroService.getHeroes().subscribe(
-        heroes => this.heroes = heroes
-      );
+      heroes => this.heroes = heroes
+    );
   }
 
   refreshHeroes = () => {
@@ -45,25 +47,39 @@ export class HeroesComponent implements OnInit {
 
   renameHero(id: number): void{
     if (this.heroes){
-      const hero: Hero = this.heroes[id - 1];
-      const exitingHero = {id: hero.id, name: 'Pricezog', team: hero.team};
-      this.heroService.editHero(id - 1, exitingHero).subscribe(
-        next => {
-            console.log(id);
-            console.log(this.heroes?.filter(x => x.id === id));
-            this.heroes?.filter(x => x.id === id).forEach(x => {console.log(x); x.name = 'Pricezog'; });
-        },
-        error => console.log(error)
-        );
+      const hero: (Hero | undefined) = this.heroes.find(h => h.id === id);
+      let exitingHero: Hero;
+      if (hero){
+        exitingHero = {id: hero.id, name: 'Pricezog', team: hero.team};
+        this.heroService.editHero(id, exitingHero)
+        .subscribe(
+          () => {
+              console.log(id);
+              console.log(this.heroes?.filter(x => x.id === id));
+              this.heroes?.filter(x => x.id === id).forEach(x => {console.log(x); x.name = 'Pricezog'; });
+          },
+          error => console.log(error)
+          );
+        }
       }
     }
 
   remove(id: number): void{
+    const idx = this.heroes.findIndex(h => h.id === id);
+    console.log(idx);
     this.heroService.removeHero(id).subscribe(
-      next => {
-        this.heroes = this.heroes?.filter(selected => selected.id !== id);
+      () => {
+        // this.heroes = this.heroes?.filter(selected => selected.id !== id);
+        if (idx > 0){
+          this.heroes = [
+            ...this.heroes.slice(0, idx),
+            ...this.heroes.slice(idx + 1),
+            ];
+          this.heroes$ = of(this.heroes);
+        }
       },
-      error => console.log(error)
+      error => console.log(error),
+      // complete => console.log(complete)
     );
   }
 

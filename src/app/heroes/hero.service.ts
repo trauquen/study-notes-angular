@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Hero } from '../shared/hero';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { catchError, filter, map } from 'rxjs/operators';
 
 @Injectable({providedIn: 'root'})
 // @Injectable()
 export class HeroService {
   private heroesUrl = 'api/heroes/';
+
   constructor(private http: HttpClient) { }
 
   getHeroes(): Observable<Hero[]> {

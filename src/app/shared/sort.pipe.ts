@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Hero } from './shared/hero';
+import { Hero } from './hero';
 
 @Pipe({
   name: 'sort',

@@ -1,4 +1,4 @@
-import { Hero } from './hero';
+import { Hero } from '../app/shared/hero';
 
 export const heroTest: Hero[] = [
   { id: 1, name: 'Boothstomper', team: 'avengers' },

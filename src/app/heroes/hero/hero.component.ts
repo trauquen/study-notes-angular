@@ -2,8 +2,8 @@ import { Component, OnInit, OnChanges, SimpleChanges, Input, Output, EventEmitte
 import { HeroDetailService } from '../hero-detail.service';
 import { Hero } from '../../shared/hero';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { map, switchMap, skipWhile} from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { map, switchMap, skipWhile, catchError} from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-hero',
@@ -11,44 +11,59 @@ import { Observable } from 'rxjs';
   styleUrls: ['./hero.component.scss'],
   styles: ['p { color: #900; }'],
   encapsulation: ViewEncapsulation.ShadowDom,
-  changeDetection: ChangeDetectionStrategy.Default,
+  changeDetection: ChangeDetectionStrategy.Default
 })
 export class HeroComponent implements OnInit, OnChanges {
   hero?: Hero;
   @Input() titlep?: string;
   @Input() id?: number;
   @Output() liked = new EventEmitter<string>();
+  isError?: boolean;
+  errorMsg?: string;
 
   constructor(private heroDetailService: HeroDetailService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    // if (this.id){
-    //   this.getHero(this.id);
-    // }
+    if (this.id){
+      this.getHero(this.id);
+    }
 
     // this.getHeroObs();
-    // this.hero = this.route.snapshot.data.hero;
-    this.route.data.subscribe((data) => {
-      // console.log(data);
-      this.hero = data.hero;
+
+    this.route.data
+    .pipe(catchError(err => throwError(err)))
+    .subscribe(data => {
+      if (typeof(data.hero) === 'object'){
+        this.isError = false;
+        this.hero = data.hero;
+      } else{
+        if (data.hero) {
+          this.isError = true;
+          this.errorMsg = data.hero;
+        }
+      }
     });
   }
 
-  private getHeroObs(): void {
-    this.route.paramMap.pipe(
-      skipWhile((params: ParamMap) => params.get('id') === null),
-      switchMap((params: ParamMap) => {
-        // console.log(params);
-        const id = params.get('id') as any;
-        return this.heroDetailService.getHero(id);
-      }),
-      map(hero => this.hero = hero)
-    ).subscribe();
-  }
+  // private getHeroObs(): void {
+  //   this.route.paramMap.pipe(
+  //     skipWhile((params: ParamMap) => params.get('id') === null),
+  //     switchMap((params: ParamMap) => {
+  //       // console.log(params);
+  //       const id = params.get('id') as any;
+  //       return this.heroDetailService.getHero(id);
+  //     }),
+  //     map(hero => this.hero = hero)
+  //   ).subscribe(
+  //     res => console.log(res),
+  //     error => console.log(error)
+  //   );
+  // }
 
   private getHero(id: number): void {
     this.heroDetailService.getHero(id).subscribe(
-        hero => { this.hero = hero; }
+        hero => { this.hero = hero; console.log(hero); },
+        error => console.log(error)
       );
   }
 

@@ -6,8 +6,7 @@ import { HeroesComponent } from './heroes.component';
 import { MatCardModule } from '@angular/material/card';
 import { InfiniteScrollDirective } from '../infinite-scroll.directive';
 import { FavoriteHeroesComponent } from './favorite-heroes/favorite-heroes.component';
-import { HeroService } from './hero.service';
-import { SortPipe } from '../sort.pipe';
+import { SortPipe } from '../shared/sort.pipe';
 
 @NgModule({
   declarations: [
@@ -26,6 +25,5 @@ import { SortPipe } from '../sort.pipe';
     // HeroesComponent,
     HeroComponent
   ]
-  // providers: [HeroService]
 })
 export class HeroesModule { }

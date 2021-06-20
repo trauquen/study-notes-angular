@@ -145,7 +145,7 @@ export class CoreComponent implements OnInit {
       realName: 'Agavens Jenmar',
       biometricData: {
         age: 30,
-        birth: new Date(1 / 1 / 1979),
+        birth: new Date(12 / 18 / 1979),
         hair: '#8b4513',
         gender: 'woman',
         rides: {toyota: true, muscle: false, horse: false},
@@ -182,9 +182,10 @@ export class CoreComponent implements OnInit {
 
   showDialog(): void{
     this.dialog.open(DialogComponent, {
-      autoFocus: false,
+      // autoFocus: false,
       data: 'Confirm'
-    }).afterClosed().subscribe(result => {
+    })
+    .afterClosed().subscribe(result => {
       if (result) { this.heroDetails.reset(); }
     });
   }

@@ -1,22 +1,7 @@
 import { Injectable, Input } from '@angular/core';
-import { HeroService } from './hero.service';
 import { Hero } from '../shared/hero';
-import { Observable } from 'rxjs';
-import { filter, take, map, find, tap } from 'rxjs/operators';
-
-// @Injectable()
-// export class HeroDetailService {
-//   private hero?: Hero;
-
-//   constructor(private heroService: HeroService) { }
-
-//   getHero(id: number): Observable<Hero[]>{
-//     return this.heroService.getHeroes().pipe(
-//       map(heroes => heroes.filter(hero => hero.id === id))
-//     );
-//   }
-// }
-
+import { Observable, of, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -25,7 +10,25 @@ import { HttpClient } from '@angular/common/http';
 export class HeroDetailService {
   constructor(private httpClient: HttpClient) { }
 
-  getHero(id: number): Observable<Hero>{
-    return this.httpClient.get<Hero>('api/heroes/' + id);
+  getHero(id: number): Observable<any>{
+    return this.httpClient.get<Hero>('api/heroes/' + id)
+    .pipe(catchError(this.handleError));
   }
+
+  private handleError(error: any): any {
+    if (error.status === 0) {
+      // A client-side or network error occurred. Handle it accordingly.
+      console.error('An error occurred:', error.error);
+    } else {
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong.
+      console.error(
+        `Backend returned code ${error.status}, ` +
+        `body was: ${error.body.error}`);
+    }
+    // Return an observable with a user-facing error message.
+    return throwError(
+      'Something bad happened; please try again later.');
+  }
+
 }

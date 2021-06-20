@@ -7,25 +7,26 @@ import { AppComponent } from './app.component';
 import { HeroComponent } from './heroes/hero/hero.component';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
-import { RouterLinkDirectiveStub } from './shared/router-link-directive-stub';
+import { RouterLinkDirectiveStub } from '../testing/router-link-directive-stub';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatMenuHarness, MatMenuItemHarness } from '@angular/material/menu/testing';
+import { MatMenuHarness } from '@angular/material/menu/testing';
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-key-logger'
+  selector: 'app-key-logger',
+  template: '<div></div>'
 })
-export class KeyLoggerComponent {
+export class KeyLoggerStubComponent {
   @Input() isnumeric?: boolean;
 }
 
 let loader: HarnessLoader;
 
-fdescribe('AppComponent', () => {
+describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
 
@@ -37,7 +38,7 @@ fdescribe('AppComponent', () => {
         FormsModule
       ],
       declarations: [
-        AppComponent, KeyLoggerComponent, HeroComponent,
+        AppComponent, KeyLoggerStubComponent, HeroComponent,
         RouterLinkDirectiveStub
       ]
     }).compileComponents();
@@ -101,6 +102,18 @@ fdescribe('AppComponent', () => {
     expect(routerLinks[7].linkParams).toBe('/material/cdk');
   });
 
+  it('can click Heroes link in template', () => {
+    const heroesLinkDe = linkDes[2];    // heroes link DebugElement
+    const heroesLink = routerLinks[2];  // heroes link directive
+
+    expect(heroesLink.navigatedTo).toBeNull('should not have navigated yet');
+
+    heroesLinkDe.triggerEventHandler('click', null);
+    fixture.detectChanges();
+
+    expect(heroesLink.navigatedTo).toBe('/heroes/1');
+  });
+
   it('should get menu and submenu open', async () => {
     const menu = await loader.getHarness(MatMenuHarness);
     await menu.open();
@@ -110,7 +123,7 @@ fdescribe('AppComponent', () => {
     expect((await submenu?.getItems())?.length).toEqual(2);
   });
 
-  it('should get string from input', () => {
+  it('should get string from input for label', () => {
     const ipt: HTMLInputElement = fixture.nativeElement.querySelector('input');
     const lbl: HTMLLabelElement = fixture.nativeElement.querySelector('label');
     ipt.value = '29232932';

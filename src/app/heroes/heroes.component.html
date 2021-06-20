@@ -15,22 +15,25 @@
       <li *ngFor="let hero of heroes | sort: 'name'; first as variable" [class.first]="variable" trackBy:trackByHeroes>{{hero | json}}</li>
     </ul>
 
+    <hr>
+
     <ul>
       <li *ngFor="let hero of heroes$ | async;">{{hero | json}}</li>
     </ul>
 
     <app-favorite-heroes></app-favorite-heroes>
+
     <p>
-      <button (click)="addHero('Thudread', 'avengers')">Add Thudread</button>
+      <button id="btnAddHero" (click)="addHero('Thudread', 'avengers')">Add Thudread</button>
     </p>
     <p>
-      <button (click)="renameHero(1)">Rename Boothstomper to Pricezog</button>
+      <button id="btnRename" (click)="renameHero(2)">Rename Boothstomper to Pricezog</button>
     </p>
     <p>
-      <button (click)="remove(4)">Delete Piranhaelli</button>
+      <button id="btnRemove" (click)="remove(4)">Delete Mr Bu Moverse</button>
     </p>
     <p>
-    <button (click)='refreshHeroes()'>Refresh in memory API</button>
+      <button id="btnRefresh" (click)='refreshHeroes()'>Refresh in memory API</button>
     <p>
 
     <hr>
