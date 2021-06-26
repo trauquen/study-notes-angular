@@ -4,4 +4,4 @@
 </ng-template>
 &nbsp;
 <span id="heroSpan" *ngIf='!isError'>Hero: {{hero?.name}}</span>
-<span *ngIf='isError'>{{errorMsg}}</span>
+<span id="errSpan" *ngIf='isError'>{{errorMsg}}</span>

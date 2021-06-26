@@ -1,6 +1,6 @@
 # Study Notes on Angular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.5.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.0.
 
 ### Return undefined when get value from property of Object.
 
@@ -15,6 +15,8 @@ ng serve --configuration=qa
 
 ng update @angular/core @angular/cli
 ng update @angular/material
+
+ng test --no-watch --code-coverage
 ```
 
 ### Using `switchMap` in `pipe()` to switch from one observable to the other.

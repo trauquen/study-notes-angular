@@ -68,7 +68,7 @@ describe('HeroesComponent', () => {
 
   it('should rename hero Boothstomper to Pricezog', waitForAsync(() => {
     const mat = fixture.debugElement.queryAll(By.css('mat-card-title'))
-    .find(el => el.nativeElement.textContent.indexOf('Boothstomper') !== -1);
+    .find(el => el.nativeElement.textContent.indexOf('Drogfisher') !== -1);
     const btn: HTMLButtonElement = fixture.nativeElement.querySelector('#btnRename');
     btn.click();
     expect(editHeroSpy.calls.any()).toBe(true, 'rename hero called');

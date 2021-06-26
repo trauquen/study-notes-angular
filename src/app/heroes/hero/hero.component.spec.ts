@@ -9,30 +9,21 @@ import { ActivatedRoute, ActivatedRouteSnapshot, Router, RouterStateSnapshot } f
 import { Hero } from 'src/app/shared/hero';
 import { heroTest } from 'src/testing/hero-test';
 import { HeroDetailService } from '../hero-detail.service';
-import { of } from 'rxjs';
-import { HeroResolverService } from './hero-resolver.service';
+import { BehaviorSubject, of } from 'rxjs';
 
 let component: HeroComponent;
 let fixture: ComponentFixture<HeroComponent>;
 
-fdescribe('HeroComponent', () => {
-  let resolver: HeroResolverService;
-  let router: ActivatedRoute;
-  const heroService = jasmine.createSpyObj('HeroDetailService', ['getHero']);
-  const getHeroSpy = heroService.getHero.and.returnValue(of(heroTest[3]));
-
-  beforeEach(() => {
-    resolver = new HeroResolverService(heroService);
-    router = new ActivatedRoute();
-  });
-
+describe('HeroComponent with route resolver', () => {
   beforeEach(async () => {
     TestBed.configureTestingModule({
       declarations: [ HeroComponent ],
-      imports: [HttpClientTestingModule,
-        RouterTestingModule
-      ],
-      providers: [ HeroDetailService, { provide: HeroDetailService, useValue: heroService }]
+      imports: [ HttpClientTestingModule, RouterTestingModule ],
+      providers: [ {
+        provide: ActivatedRoute,
+        useValue: {
+          data: new BehaviorSubject({ hero: heroTest[2] })
+        }, }]
     })
     .compileComponents();
   });
@@ -61,10 +52,9 @@ fdescribe('HeroComponent', () => {
     expect(emitString).toEqual('Hunter Hustle');
   });
 
-  it('should display that hero\'s name', fakeAsync(() => {
-    fixture.detectChanges();
-    tick();
+  it('should display that hero\'s name', waitForAsync(() => {
     expect(fixture.debugElement.query(By.css('#heroSpan')).nativeElement.textContent).toContain('Bloodyllips');
+    expect(fixture.debugElement.query(By.css('#errSpan'))).toBeNull();
   }));
 });
 

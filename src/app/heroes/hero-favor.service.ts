@@ -14,7 +14,7 @@ export class HeroFavorService extends HeroService {
 
   getHeroes(): Observable<Hero[]>{
     return super.getHeroes().pipe(
-      map(heroes => heroes.slice(0, 5))
+      map(heroes => heroes.slice(0, 4))
     );
   }
 }
