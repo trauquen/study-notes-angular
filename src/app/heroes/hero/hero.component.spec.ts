@@ -53,6 +53,7 @@ describe('HeroComponent with route resolver', () => {
   });
 
   it('should display that hero\'s name', waitForAsync(() => {
+    console.log(component.hero, 'shiver')
     expect(fixture.debugElement.query(By.css('#heroSpan')).nativeElement.textContent).toContain('Bloodyllips');
     expect(fixture.debugElement.query(By.css('#errSpan'))).toBeNull();
   }));
