@@ -69,9 +69,9 @@ describe('FavoriteHeroesComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should get RouterLinks from template', async () => {
+  fit('should get RouterLinks from template', async () => {
     console.log(Object.values(linkDes));
-    expect(routerLinks.length).toBe(4, 'should have 4 routerLinks');
-    // routerLinks.forEach((e, i) => expect(e.linkParams).toEqual([ './', (i + 1) ]));
+    expect(routerLinks.length).toBe(4);
+    routerLinks.forEach((e, i) => expect(e.linkParams).toEqual([ './', (i + 1) ]));
   });
 });

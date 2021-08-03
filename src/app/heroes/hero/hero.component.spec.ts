@@ -53,8 +53,8 @@ describe('HeroComponent with route resolver', () => {
   });
 
   it('should display that hero\'s name', waitForAsync(() => {
-    console.log(component.hero, 'shiver')
-    expect(fixture.debugElement.query(By.css('#heroSpan')).nativeElement.textContent).toContain('Bloodyllips');
+    // console.log(heroTest, 'shiver')
+    expect(fixture.debugElement.query(By.css('#heroSpan')).nativeElement.textContent).toContain(heroTest[2].name);
     expect(fixture.debugElement.query(By.css('#errSpan'))).toBeNull();
   }));
 });
@@ -91,7 +91,7 @@ xdescribe('HeroComponent without route resolver', () => {
 
   it('should display that hero\'s name', fakeAsync(() => {
     activatedRoute.setParamMap({id: expectedHero.id});
-    expect(getHeroSpy.calls.any()).toBe(true, 'getHero called');
+    expect(getHeroSpy.calls.any()).toBeTrue();
     fixture.detectChanges();
     expect(fixture.debugElement.query(By.css('#heroSpan')).nativeElement.textContent).toContain(expectedHero.name);
   }));
