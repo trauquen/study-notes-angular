@@ -1,0 +1,28 @@
+<h3>template-login works!</h3>
+<form (ngSubmit)="login()">
+  <p>
+    <input
+      type="text"
+      name="username"
+      placeholder="Username"
+      [(ngModel)]="username"
+    />
+  </p>
+  <p>
+    <input
+      type="password"
+      name="password"
+      placeholder="Password"
+      [(ngModel)]="password"
+    />
+  </p>
+  <p><button type="submit">Login</button></p>
+</form>
+
+<p>
+  You are trying to login as <b>{{ username }}</b
+  >.
+  <a [routerLink]="['./r']" routerLinkActive="router-link-active"
+    >login with reactive page</a
+  >
+</p>

@@ -13,25 +13,22 @@
           "strict": true
         }
       },
-      "root": "",
-      "sourceRoot": "src",
+      "root": "apps/ngapp",
+      "sourceRoot": "apps/ngapp/src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ngapp",
-            "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.app.json",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
+            "outputPath": "dist/apps/ngapp",
+            "index": "apps/ngapp/src/index.html",
+            "main": "apps/ngapp/src/main.ts",
+            "polyfills": "apps/ngapp/src/polyfills.ts",
+            "tsConfig": "apps/ngapp/tsconfig.app.json",
+            "assets": ["apps/ngapp/src/favicon.ico", "apps/ngapp/src/assets"],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.scss"
+              "apps/ngapp/src/styles.scss"
             ],
             "scripts": [],
             "vendorChunk": true,
@@ -45,8 +42,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "replace": "apps/ngapp/src/environments/environment.ts",
+                  "with": "apps/ngapp/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -91,17 +88,14 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.spec.json",
-            "karmaConfig": "karma.conf.js",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
+            "main": "apps/ngapp/src/test.ts",
+            "polyfills": "apps/ngapp/src/polyfills.ts",
+            "tsConfig": "apps/ngapp/tsconfig.spec.json",
+            "karmaConfig": "apps/ngapp/karma.conf.js",
+            "assets": ["apps/ngapp/src/favicon.ico", "apps/ngapp/src/assets"],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
-              "src/styles.scss"
+              "apps/ngapp/src/styles.scss"
             ],
             "scripts": []
           }
@@ -110,13 +104,10 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "tsconfig.app.json",
-              "tsconfig.spec.json",
-              "e2e/tsconfig.json"
+              "apps/ngapp/tsconfig.app.json",
+              "apps/ngapp/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         },
         "e2e": {
@@ -132,7 +123,51 @@
           }
         }
       }
+    },
+    "ngapp-e2e": {
+      "root": "apps/ngapp-e2e",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "apps/ngapp-e2e/protractor.conf.js",
+            "devServerTarget": "ngapp:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "ngapp:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "apps/ngapp-e2e/tsconfig.json",
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
     }
   },
-  "defaultProject": "ngapp"
+  "defaultProject": "ngapp",
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/angular:application": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "scss"
+    }
+  }
 }

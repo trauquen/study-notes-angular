@@ -1,0 +1,31 @@
+/* You can add global styles to this file, and also import other style files */
+.valid {
+  border-bottom: solid green;
+}
+.invalid {
+  border-bottom: solid red;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 1rem 0.5rem;
+}
+body {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: cornsilk;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 250px auto;
+}
+
+.item {
+  padding: 0 0.5rem;
+  box-sizing: content-box;
+}
+
+.item-2-root {
+  padding: 0;
+}

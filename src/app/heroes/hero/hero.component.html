@@ -1,7 +1,0 @@
-<ng-template [ngIf]="titlep">
-  <p><span>{{ titlep }} again in child</span></p>
-  <button (click)="liked.emit('Hunter Hustle')">click</button>
-</ng-template>
-&nbsp;
-<span id="heroSpan" *ngIf='!isError'>Hero: {{hero?.name}}</span>
-<span id="errSpan" *ngIf='isError'>{{errorMsg}}</span>

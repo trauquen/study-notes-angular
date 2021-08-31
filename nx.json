@@ -1,0 +1,23 @@
+{
+  "npmScope": "ngapp",
+  "affected": {
+    "defaultBase": "master"
+  },
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": "*",
+    "tslint.json": "*",
+    ".eslintrc.json": "*",
+    "nx.json": "*",
+    "tsconfig.base.json": "*"
+  },
+  "projects": {
+    "ngapp": {
+      "tags": []
+    },
+    "ngapp-e2e": {
+      "tags": [],
+      "implicitDependencies": ["ngapp"]
+    }
+  }
+}
