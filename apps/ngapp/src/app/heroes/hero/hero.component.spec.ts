@@ -10,15 +10,15 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { HeroComponent } from './hero.component';
 import { By } from '@angular/platform-browser';
 import { first } from 'rxjs/operators';
-import { ActivatedRouteStub } from 'src/testing/activated-route-stub';
+import { ActivatedRouteStub } from '../../../testing/activated-route-stub';
 import {
   ActivatedRoute,
   ActivatedRouteSnapshot,
   Router,
   RouterStateSnapshot,
 } from '@angular/router';
-import { Hero } from 'src/app/shared/hero';
-import { heroTest } from 'src/testing/hero-test';
+import { Hero } from '../../shared/hero';
+import { heroTest } from '../../../testing/hero-test';
 import { HeroDetailService } from '../hero-detail.service';
 import { BehaviorSubject, of } from 'rxjs';
 
@@ -70,7 +70,7 @@ describe('HeroComponent with route resolver', () => {
   });
 
   it(
-    "should display that hero's name",
+    'should display that hero\'s name',
     waitForAsync(() => {
       // console.log(heroTest, 'shiver')
       expect(
@@ -113,7 +113,7 @@ xdescribe('HeroComponent without route resolver', () => {
     fixture.detectChanges();
   });
 
-  it("should display that hero's name", fakeAsync(() => {
+  it('should display that hero\'s name', fakeAsync(() => {
     activatedRoute.setParamMap({ id: expectedHero.id });
     expect(getHeroSpy.calls.any()).toBeTrue();
     fixture.detectChanges();
